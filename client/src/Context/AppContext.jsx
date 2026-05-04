@@ -1,18 +1,40 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export const Appcontext = createContext();
 
 export const AppcontextProvider = ({children})=>{
 
-    const [dashboard,setDashboard] = useState([
-        {Short : "Day" , total:"" ,color:"#008f7a"},
-        {Short : "Week" , total:"" ,color:"#d65db1"},
-        {Short : "month" , total:"" ,color:"#2c73d2"},
-        {Short : "Year" , total:"" ,color:"#845ec2"},
+
+const [data,setData] = useState([])
+const [dashboard,setDashboard] = useState([])
+
+
+    useEffect(()=>{
+        const now = new Date()
+
+        const day = data.filter((d)=>new Date(d.date).toDateString() === now.toDateString());
+
+        const week = data.filter((d)=>{
+            const weekAgo = new Date();
+            weekAgo.setDate(new Date()-7)
+            return new Date(d.data <= weekAgo )
+        })
+
+        const month = data.filter((d)=>{
+            let monthAgo = new Date() - 30
+            return new Date(d.data >= monthAgo);
+        });
+
+
+        setDashboard([
+        {Short : "Day" , total:day.length ,color:"#008f7a"},
+        {Short : "Week" , total:week.length ,color:"#d65db1"},
+        {Short : "month" , total:month.length ,color:"#2c73d2"},
     ])
 
-    const [data,setData] = useState([])
+    },[data])
 
+    
 
     const value = {
         dashboard,setDashboard,
