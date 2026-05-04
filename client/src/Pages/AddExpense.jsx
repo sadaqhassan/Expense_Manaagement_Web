@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAppContext } from "../Context/AppContext";
 
 export default function AddExpense() {
   const [form, setForm] = useState({
@@ -8,20 +9,19 @@ export default function AddExpense() {
     date: "",
   });
 
+  const {setData,data} = useAppContext();
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form); // send to API later
+    setData([...data,form]);
   };
 
   return (
-    <div className="min-h-screen md:w-[750px] flex items-center justify-center p-4">
-      <div className="w-full  bg-white rounded-2xl shadow-xl p-6">
-
-        {/* Header */}
+    <div>
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">
           Add Expense
         </h2>
@@ -29,8 +29,12 @@ export default function AddExpense() {
  <h1 className='text-xl text-gray-900 font-medium'>Expense Management </h1>
         <p className='text-sm text-gray-600 mt-1 mb-5'>Feel Free to Manage Your expense Add , update , and delete</p>
 
+    
+    <div className="min-h-screen md:w-[750px] flex items-center justify-center p-4">
+      <div className="w-full  bg-white rounded-2xl shadow-xl p-6">
+        
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 shadow-xl">
 
           {/* Title */}
           <div>
@@ -70,9 +74,9 @@ export default function AddExpense() {
               className="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
               required
             >
-              <option value="">Select category</option>
-              <option>Food</option>
-              <option>Transport</option>
+              <option  value="">Select category</option>
+              <option >Food</option>
+              <option >Transport</option>
               <option>Shopping</option>
               <option>Bills</option>
             </select>
@@ -100,6 +104,7 @@ export default function AddExpense() {
           </button>
 
         </form>
+      </div>
       </div>
     </div>
   );
