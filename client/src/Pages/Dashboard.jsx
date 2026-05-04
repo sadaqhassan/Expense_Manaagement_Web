@@ -9,13 +9,13 @@ const Dashboard = () => {
     <div className='flex flex-col justify-between sticky '>
     <div className='grid grid-cols-2 md:grid-cols-4 gap-6 top-10'>
         {
-            dashboard.map((data)=>(
-                <div style={{backgroundColor:data.color}} className={`shadow-xl rounded text-white w-46 h-20`}>  
+            dashboard.length > 0 && dashboard.map((data)=>(
+                <div style={{backgroundColor:data.color}} className={`shadow-xl rounded text-white w-56 h-20`}>  
                 <div className='flex justify-between px-2 py-2'>
                     <p className='text-sm '>Last {data.Short}</p>
                     <BanknoteArrowDown/>
                 </div>
-                <p className='text-center mb-3 font-medium'>{data.total}</p>
+                <p className='text-center mb-3 font-medium'>{data.total ? data.total : "0"}</p>
                 </div>
             ))
         }
