@@ -1,10 +1,12 @@
 import { Edit, Trash2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Table() {
+    const navigate = useNavigate()
   const data = [
-    { id: 1, title: "Food", amount: 50, status: "Paid", date: "2026-05-01" },
-    { id: 2, title: "Transport", amount: 20, status: "Pending", date: "2026-05-02" },
-    { id: 3, title: "Shopping", amount: 100, status: "Paid", date: "2026-05-03" },
+    { id: 1, category :"Shoping", title: "Food", amount: 50, status: "Paid", date: "2026-05-01" },
+    { id: 2, category :"Food", title: "Transport", amount: 20, status: "Pending", date: "2026-05-02" },
+    { id: 3, category :"Transport", title: "Shopping", amount: 100, status: "Paid", date: "2026-05-03" },
   ];
 
   const getStatusStyle = (status) => {
@@ -22,7 +24,7 @@ export default function Table() {
           <h2 className="text-lg md:text-xl font-semibold text-gray-700">
             Expenses
           </h2>
-          <button className="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-800 w-full md:w-auto">
+          <button onClick={()=>navigate('/add-expense')} className="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-800 w-full md:w-auto">
             + Add Expense
           </button>
         </div>
@@ -31,18 +33,20 @@ export default function Table() {
         <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-sm text-left">
             <thead className="bg-gray-50 text-gray-600 uppercase text-xs">
-              <tr>
+            <tr>
+                <th className="p-4">Category</th>
                 <th className="p-4">Title</th>
                 <th className="p-4">Amount</th>
                 <th className="p-4">Status</th>
                 <th className="p-4">Date</th>
                 <th className="p-4 text-right">Actions</th>
-              </tr>
+            </tr>
             </thead>
 
             <tbody>
               {data.map((item) => (
                 <tr key={item.id} className=" hover:bg-gray-50">
+                  <td className="p-4 font-medium">{item.category}</td>
                   <td className="p-4 font-medium">{item.title}</td>
                   <td className="p-4 text-green-600 font-semibold">
                     ${item.amount}
