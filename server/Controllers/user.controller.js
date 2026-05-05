@@ -53,7 +53,8 @@ export const loginUser = async (req, res) => {
         }
 
         const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
-        return res.status(200).json({success:true, message: "User logged in successfully", }).cookie("token", token, { httpOnly: true });
+        const { password: _, ...userData } = user._doc; // Exclude password from user data  
+        return res.status(200).json({success:true, message: "User logged in successfully", user: userData }).cookie("accessToken", token, { httpOnly: true });
     } catch (error) {
         return res.status(500).json({success:false, message: "Server error"+error.message });
         console.log("Error logging in user:", error);
