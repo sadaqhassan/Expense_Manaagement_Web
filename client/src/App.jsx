@@ -7,6 +7,9 @@ import Expenses from './Pages/Expenses'
 import Auth from './Pages/Auth'
 import {Toaster} from 'react-hot-toast'
 import { useAppContext } from './Context/AppContext'
+import AdminDashboard from './Pages/Admin/AdminDashboard'
+import AdminLayout from './Pages/Admin/AdminLayout'
+import ManageUsers from './Pages/Admin/ManageUsers'
 
 const App = () => {
   const {currentUser} = useAppContext();
@@ -18,6 +21,13 @@ const App = () => {
         <Route index element={<Dashboard/>}/>
         <Route path='add-expense' element={<AddExpense/>}/>
         <Route path='expenses' element={<Expenses/>}/>
+        </Route>
+
+        {/* //admin#routees */}
+        <Route path='/admin' element={currentUser &&
+          currentUser.role === 'admin' ? <AdminLayout/> : <Auth/>}>
+        <Route index element={<AdminDashboard/>}/>
+        <Route path='manage-users' element={<ManageUsers/>}/>
         </Route>
       </Routes>
     </div>
