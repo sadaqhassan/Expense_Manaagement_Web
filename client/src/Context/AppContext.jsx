@@ -7,7 +7,20 @@ export const AppcontextProvider = ({children})=>{
 
 const [data,setData] = useState([])
 const [dashboard,setDashboard] = useState([])
+const [currentUser,setCurrentUser] = useState(()=>{
+    let user = localStorage.getItem("user")
+    if(user){
+        return JSON.parse(user)
+    }else{
+        return null
+    }
+})
 
+useEffect(()=>{
+    if(currentUser){
+        localStorage.setItem("user",JSON.stringify(currentUser))
+    }
+})
 
     useEffect(()=>{
         const now = new Date()
@@ -37,7 +50,8 @@ const [dashboard,setDashboard] = useState([])
 
     const value = {
         dashboard,setDashboard,
-        data,setData
+        data,setData,
+        currentUser,setCurrentUser
     }
 
     return <Appcontext.Provider value={value}>
