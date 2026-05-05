@@ -1,13 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BanknoteArrowDown, CalendarCheck2Icon, DollarSignIcon } from 'lucide-react'
 import Table from '../Components/Table'
 import { useAppContext } from '../Context/AppContext'
+import ResentExpense from '../Components/ResentExpense'
 
 const Dashboard = () => {
-    const { dashboard } = useAppContext()
+    const [Resent,setResent] = useState([])
+    const { dashboard ,data} = useAppContext()
+
+    useEffect(()=>{
+    const now = new Date()
+    const day = data.filter((d)=>new Date(d.date).toDateString() === now.toDateString());
+    setResent(day)
+    },[dashboard])
+
+    
   return (
-    <div className='flex flex-col justify-between sticky '>
-    <div className='grid grid-cols-2 md:grid-cols-4 gap-6 top-10'>
+    <div className='flex flex-col  justify-between '>
+    <div className='grid grid-cols-2 md:grid-cols-4 gap-6 top-10 sticky bg-white'>
         {
             dashboard.length > 0 && dashboard.map((data)=>(
                 <div style={{backgroundColor:data.color}} className={`shadow-xl rounded text-white w-56 h-20`}>  
@@ -20,6 +30,8 @@ const Dashboard = () => {
             ))
         }
     </div>
+
+    <ResentExpense dashboard={Resent}/>
     </div>
   )
 }
