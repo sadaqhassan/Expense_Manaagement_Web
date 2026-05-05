@@ -16,14 +16,16 @@ const [dashboard,setDashboard] = useState([])
 
         //week
         let weekAgo = new Date()
-        weekAgo.setDate(new Date-7);
+        weekAgo.setDate(now.getDate() -7);
         
         const week = data.filter((d)=>{
             return new Date(d.date >= weekAgo);
         });
-        
-        const month = ["S","£"]
 
+        const month = data.filter((d)=>{
+            let monthAgo = now.getMonth();
+            return new Date(d.data >= monthAgo);
+        });
 
         setDashboard([
         {Short : "Day" , total:"$ "+day.length ,data:day,color:"#008f7a"},
