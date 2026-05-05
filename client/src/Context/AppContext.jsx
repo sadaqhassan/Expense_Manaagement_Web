@@ -16,15 +16,14 @@ const [dashboard,setDashboard] = useState([])
 
         //week
         let weekAgo = new Date()
-        weekAgo.setDate(now.getDate() -7);
+        weekAgo.setDate(now.getDate()-7);
         
         const week = data.filter((d)=>{
             return new Date(d.date >= weekAgo);
         });
 
         const month = data.filter((d)=>{
-            let monthAgo = now.getMonth();
-            return new Date(d.data >= monthAgo);
+            return new Date(d.date === now.getMonth()) ;
         });
 
         setDashboard([
