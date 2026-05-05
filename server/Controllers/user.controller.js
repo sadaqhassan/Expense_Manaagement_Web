@@ -60,3 +60,16 @@ export const loginUser = async (req, res) => {
         console.log("Error logging in user:", error);
     }
 }
+
+
+//getAllUsers
+
+export const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find().select("-password"); // Exclude password field   
+        return res.status(200).json({ success: true, users });
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "Server error" + error.message });
+        console.log("Error fetching all users:", error);
+    }
+};
