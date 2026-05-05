@@ -1,0 +1,34 @@
+import jwt from "jsonwebtoken";
+
+export const isAuth  = async (req, res, next) => {
+  const token = req.cookies.accessToken;
+
+  if (!token) {
+    return res.status(401).json({ success: false, message: "Unauthorized" });
+  }
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.userId = decoded.userId;
+    next();
+  } catch (error) {
+    return res.status(500).json({ success: false, message: "Internal Server Error"+error.message });
+    console.log("Error in authentication middleware:", error);
+  }
+}
+
+
+export const isAdmin = async (req, res, next) => {
+  try {
+    
+    const user = await User.findById(req.userId);
+    if (user && user.role !== "admin") {
+        return res.status(403).json({ success: false, message: "Forbidden" });
+    }
+
+    next();
+  }
+  catch (error) {
+    return res.status(500).json({ success: false, message: "Server error" });
+    console.log("Error in admin middleware:", error);
+  }
+}   
