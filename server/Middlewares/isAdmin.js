@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { User } from "../Models/user.model.js";
 
 export const isAuth  = async (req, res, next) => {
   const token = req.cookies.accessToken;
@@ -19,7 +20,7 @@ export const isAuth  = async (req, res, next) => {
 
 export const isAdmin = async (req, res, next) => {
   try {
-    
+
     const user = await User.findById(req.userId);
     if (user && user.role !== "admin") {
         return res.status(403).json({ success: false, message: "Forbidden" });
@@ -28,7 +29,7 @@ export const isAdmin = async (req, res, next) => {
     next();
   }
   catch (error) {
-    return res.status(500).json({ success: false, message: "Server error" });
+    return res.status(500).json({ success: false, message: "Server error"+error.message });
     console.log("Error in admin middleware:", error);
   }
 }   
