@@ -28,6 +28,7 @@ const App = () => {
           currentUser.role === 'admin' ? <AdminLayout/> : <Auth/>}>
         <Route index element={<AdminDashboard/>}/>
         <Route path='manage-users' element={<ManageUsers/>}/>
+        <Route path='add-user' element={<AddUser/>}/>
         </Route>
       </Routes>
     </div>
