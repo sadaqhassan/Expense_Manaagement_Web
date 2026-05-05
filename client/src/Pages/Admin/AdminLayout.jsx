@@ -15,7 +15,6 @@ const AdminLayout = () => {
         }
       }, [currentUser])
 
-
   return (
     <div className='flex'>
         <AdminSidebar/>
