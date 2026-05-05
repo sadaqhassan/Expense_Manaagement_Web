@@ -12,26 +12,24 @@ const [dashboard,setDashboard] = useState([])
     useEffect(()=>{
         const now = new Date()
 
-        const day = data.filter((d)=>new Date(d.date).toDateString() === now.toDateString());
+        const day = data.filter(d=>new Date(d.date).toDateString() === now.toDateString());
 
+        //week
+        let weekAgo = new Date()
+        weekAgo.setDate(new Date-7);
+        
         const week = data.filter((d)=>{
-            const weekAgo = new Date();
-            weekAgo.setDate(new Date()-7)
-            return new Date(d.data <= weekAgo )
-        })
-
-        const month = data.filter((d)=>{
-            let monthAgo = new Date() - 30
-            return new Date(d.data >= monthAgo);
+            return new Date(d.date >= weekAgo);
         });
+        
+        const month = ["S","£"]
 
 
         setDashboard([
-        {Short : "Day" , total:day.length ,color:"#008f7a"},
-        {Short : "Week" , total:week.length ,color:"#d65db1"},
-        {Short : "month" , total:month.length ,color:"#2c73d2"},
+        {Short : "Day" , total:"$ "+day.length ,data:day,color:"#008f7a"},
+        {Short : "Week" , total:"$ "+week.length ,color:"#d65db1"},
+        {Short : "month" , total:"$ "+month.length ,color:"#2c73d2"},
     ])
-
     },[data])
 
     
