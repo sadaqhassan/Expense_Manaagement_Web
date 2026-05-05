@@ -2,7 +2,7 @@ import React from "react";
 
 const ResentExpense = ({ dashboard = [] }) => {
 return (
-    <div className="sticky top-6 h-[85vh] overflow-y-auto pr-2">
+    <div className="sticky bottom-6 -z-40  pr-2 min-w-[500px]">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-bold text-gray-800">
@@ -15,11 +15,11 @@ return (
       </div>
 
       {/* Table Wrapper */}
-      <div className="overflow-x-auto rounded-xl shadow-md border border-gray-100 bg-white">
-        <table className="max-w-6xl text-sm">
+      <div className="overflow-x-auto min-w-[500px] rounded-xl shadow-md border border-gray-100 bg-white">
+        <table className="text-sm  overflow-y-scroll min-w-[500px]">
 
           {/* Table Head */}
-          <thead className="bg-gray-50 text-gray-600 text-xs uppercase tracking-wider">
+          <thead className="text-xs uppercase  overflow-y-scroll">
             <tr>
             <th className="px-6 py-3 text-right">Category</th>
             <th className="px-6 py-3 text-right">Title</th>
