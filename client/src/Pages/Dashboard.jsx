@@ -16,7 +16,7 @@ const Dashboard = () => {
 
     
   return (
-    <div className='flex flex-col  justify-between '>
+    <div className='flex flex-col  space-y-40'>
     <div className='grid grid-cols-2 md:grid-cols-4 gap-6 top-10 sticky bg-white'>
         {
             dashboard.length > 0 && dashboard.map((data)=>(
@@ -31,7 +31,7 @@ const Dashboard = () => {
         }
     </div>
 
-    <ResentExpense dashboard={Resent}/>
+    {/* <ResentExpense dashboard={Resent}/> */}
     </div>
   )
 }
