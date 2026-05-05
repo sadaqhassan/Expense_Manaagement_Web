@@ -1,8 +1,22 @@
 import React from 'react'
 import Sidebar from '../Components/SideBar'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useAppContext } from '../Context/AppContext';
 
 const Layout = () => {
+
+  const navigate = useNavigate();
+
+  const {currentUser} = useAppContext();
+  useEffect(()=>{
+    if(currentUser.role === 'admin'){
+      navigate('/admin')
+    }else{
+      navigate('/')
+    }
+  }, [currentUser])
+
   return (
     <div className='flex space-x-5'>
         <Sidebar/>
