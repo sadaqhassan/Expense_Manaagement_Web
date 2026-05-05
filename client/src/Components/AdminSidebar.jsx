@@ -14,19 +14,19 @@ export default function AdminSidebar() {
         {/* Menu */}
         <ul className="mt-6 space-y-2 px-3">
           
-          <Link to={'/'} className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 cursor-pointer">
+          <Link to={'/admin'} className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 cursor-pointer">
             <Home size={20} />
-            Dashboard
+           Dashboard
           </Link>
 
-          <Link to={'expenses'} className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 cursor-pointer">
+          <Link to={'/admin/manage-users'} className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 cursor-pointer">
             <Wallet size={20} />
-            Expenses
+             Manage users 
           </Link>
 
-          <Link to={'add-expense'} className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 cursor-pointer">
+          <Link to={'/admin/add-user'} className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 cursor-pointer">
             <PlusCircle size={20} />
-            Add Expense
+            Add user
           </Link>
 
         </ul>
