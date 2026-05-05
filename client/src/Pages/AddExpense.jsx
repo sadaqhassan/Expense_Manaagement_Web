@@ -27,10 +27,10 @@ export default function AddExpense() {
         </h2>
 
 <h1 className='text-xl text-gray-900 font-medium'>Expense Management </h1>
-        <p className='text-sm text-gray-600 mt-1 mb-5'>Feel Free to Manage Your expense Add , update , and delete</p>
+    <p className='text-sm text-gray-600 mt-1 mb-5'>Feel Free to Manage Your expense Add , update , and delete</p>
 
     
-    <div className="min-h-screen md:w-[750px] flex items-center justify-center p-4">
+    <div className=" md:w-[750px] flex items-center justify-center p-4">
     <div className="w-full  bg-white rounded-2xl shadow-xl p-6">
         
         {/* Form */}
