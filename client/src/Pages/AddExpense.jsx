@@ -26,29 +26,29 @@ export default function AddExpense() {
           Add Expense
         </h2>
 
- <h1 className='text-xl text-gray-900 font-medium'>Expense Management </h1>
+<h1 className='text-xl text-gray-900 font-medium'>Expense Management </h1>
         <p className='text-sm text-gray-600 mt-1 mb-5'>Feel Free to Manage Your expense Add , update , and delete</p>
 
     
     <div className="min-h-screen md:w-[750px] flex items-center justify-center p-4">
-      <div className="w-full  bg-white rounded-2xl shadow-xl p-6">
+    <div className="w-full  bg-white rounded-2xl shadow-xl p-6">
         
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4 shadow-xl">
 
           {/* Title */}
-          <div>
+        <div>
             <label className="text-sm text-gray-600">Title</label>
             <input
-              type="text"
-              name="title"
-              placeholder="e.g. Food"
-              value={form.title}
-              onChange={handleChange}
-              className="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
-              required
+                type="text"
+                name="title"
+                placeholder="e.g. Food"
+                value={form.title}
+                onChange={handleChange}
+                className="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+                required
             />
-          </div>
+        </div>
 
           {/* Amount */}
           <div>
