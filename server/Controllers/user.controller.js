@@ -73,3 +73,16 @@ export const getAllUsers = async (req, res) => {
         console.log("Error fetching all users:", error);
     }
 };
+
+//delete user
+
+export const deleteUser = async (req, res) => {
+    const userId = req.params.id;
+    try {
+        await User.findByIdAndDelete(userId);
+        return res.status(200).json({ success: true, message: "User deleted successfully" });
+        } catch (error) {     
+        return res.status(500).json({ success: false, message: "Server error" + error.message });
+        console.log("Error deleting user:", error);
+    }
+}
