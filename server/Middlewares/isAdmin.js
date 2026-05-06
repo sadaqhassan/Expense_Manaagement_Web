@@ -9,7 +9,15 @@ export const isAuth  = async (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const getUser = await User.findById(decoded.userId);
+
+    if (!getUser) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+    
     req.userId = decoded.userId;
+    
     next();
   } catch (error) {
     return res.status(500).json({ success: false, message: "Internal Server Error"+error.message });
