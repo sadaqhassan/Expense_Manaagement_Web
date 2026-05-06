@@ -10,6 +10,7 @@ import { useAppContext } from './Context/AppContext'
 import AdminDashboard from './Pages/Admin/AdminDashboard'
 import AdminLayout from './Pages/Admin/AdminLayout'
 import ManageUsers from './Pages/Admin/ManageUsers'
+import AddUser from './Pages/Admin/AddUser'
 
 const App = () => {
   const {currentUser} = useAppContext();
