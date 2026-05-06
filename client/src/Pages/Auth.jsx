@@ -2,11 +2,12 @@ import { useState } from "react"
 import toast from "react-hot-toast"
 import { useAppContext } from "../Context/AppContext"
 import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
 const Auth = () => {
 
     const [state, setState] = useState("login")
-    const {setCurrentUser} = useAppContext()
+    const {setCurrentUser,userData,setUserData} = useAppContext()
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ const Auth = () => {
           const res = await fetch("http://localhost:4000/api/user/login",{
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type":"application/json"
           },
           body: JSON.stringify(formData),
           credentials: "include"
@@ -31,7 +32,7 @@ const Auth = () => {
         if(!data.success){
           return toast.error(data.message)
         }
-        setCurrentUser(data.user)
+        setUserData(data.user)
         toast.success(data.message)
         navigate("/")
         }else{
