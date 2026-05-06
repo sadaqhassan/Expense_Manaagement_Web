@@ -15,9 +15,28 @@ export default function AddExpense() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    setData([...data,form]);
+
+    const res = await fetch("http://localhost:4000/api/expense/add-expense",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(form),
+      credentials: "include"
+    });
+
+    const result = await res.json();
+    if (result.success) {
+      setData([...data, form]);
+      setForm({
+        title: "",
+        amount: "",
+        category: "",
+        date: ""
+      });
+    }
   };
 
   return (
