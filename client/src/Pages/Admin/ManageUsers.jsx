@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
+import { useAppContext } from "../../Context/AppContext";
 
 const ManageUsers = () => {
-  const [users, setUsers] = useState([]);
+const {users,setUsers} =  useAppContext()
+
   const [search, setSearch] = useState("");
+  const {currentUser, setCurrentUser} = useAppContext();
 
   const fetchUsers = async () => {
     try {
@@ -26,6 +29,7 @@ const ManageUsers = () => {
     }
   };
 
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -33,6 +37,33 @@ const ManageUsers = () => {
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(search.toLowerCase())
   );
+
+
+  //delete user
+  const deleteUser = async (userId) => {
+    try {
+      const res = await fetch(`http://localhost:4000/api/user/delete-user/${userId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        toast.success(data.message);
+        if(currentUser._id === userId){
+          setCurrentUser(null);
+          window.location.href = "/auth"; // Redirect to home page after logout
+        }
+        fetchUsers(); // Refresh the user list
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Server error");
+    }
+  };
 
   return (
     <div className="p-4 md:p-8 md:w-[800px] min-h-screen">
@@ -101,7 +132,7 @@ const ManageUsers = () => {
                     <button className="p-2 rounded-lg hover:bg-blue-100 text-blue-600">
                       <Pencil size={18} />
                     </button>
-                    <button className="p-2 rounded-lg hover:bg-red-100 text-red-600">
+                    <button className="p-2 rounded-lg hover:bg-red-100 text-red-600" onClick={() => deleteUser(user._id)}>
                       <Trash2 size={18} />
                     </button>
                   </td>
