@@ -11,7 +11,7 @@ const app = express();
 configApp(app);
 
 app.use("/api/user",userRoute);
-app.use("/api/expense",expenseRoute);
+app.use("/api/expenses",expenseRoute);
 
 const port = process.env.PORT
 
