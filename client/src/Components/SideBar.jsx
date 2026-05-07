@@ -1,7 +1,24 @@
 import { Home, Wallet, PlusCircle, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAppContext } from "../Context/AppContext";
 
 export default function Sidebar() {
+
+  const {setCurrentUser} = useAppContext()
+
+  const logout = async () => {
+    const res = await fetch("http://localhost:4000/api/user/logout",{
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include"
+    });
+    const result = await res.json();
+    setCurrentUser(null);
+    toast.success(result.message);
+  }
+
   return (
     <div className="h-screen sticky top-0 w-64 bg-gray-900 text-white flex flex-col justify-between shadow-lg">
       
@@ -34,7 +51,7 @@ export default function Sidebar() {
 
       {/* Logout */}
       <div className="p-4 border-t border-gray-700">
-        <button className="flex items-center gap-3 w-full p-3 rounded-lg hover:bg-red-600 transition">
+        <button className="flex items-center gap-3 w-full p-3 rounded-lg hover:bg-red-600 transition" onClick={logout}>
           <LogOut size={20} />
           Logout
         </button>
