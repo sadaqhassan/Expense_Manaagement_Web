@@ -8,6 +8,7 @@ export default function Table() {
   const navigate = useNavigate();
   const {expenseData, setExpenseData} = useAppContext();
 
+  console.log(expenseData.length.toLocaleString())
 
   const getStatusStyle = (status) => {
     return status === "Paid"
