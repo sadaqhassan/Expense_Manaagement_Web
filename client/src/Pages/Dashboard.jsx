@@ -6,11 +6,11 @@ import ResentExpense from '../Components/ResentExpense'
 
 const Dashboard = () => {
     const [Resent,setResent] = useState([])
-    const { dashboard ,data} = useAppContext()
+    const { dashboard ,expenseData} = useAppContext()
 
     useEffect(()=>{
     const now = new Date()
-    const day = data.filter((d)=>new Date(d.date).toDateString() === now.toDateString());
+    const day = expenseData.filter((d)=>new Date(d.date).toDateString() === now.toDateString());
     setResent(day)
     },[dashboard])
 
