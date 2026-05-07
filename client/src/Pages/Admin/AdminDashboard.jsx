@@ -1,8 +1,38 @@
+import { useEffect } from "react";
 import { useAppContext } from "../../Context/AppContext";
+import { useState } from "react";
 
 export default function AdminDashboard() {
 
-  const {expenseData,users} = useAppContext()
+    const {users} = useAppContext()
+
+    const [AllExpenses,setAllExpenses] = useState([]);
+    
+        const fetchAllExpenses = async()=>{
+            try {
+              const res = await fetch("http://localhost:4000/api/expenses/get-all-expenses", {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+            });
+            const data = await res.json();
+            if (data.success) {
+                setAllExpenses(data.AllExpenses);
+            } else {
+                toast.error(data.message);
+                if(data.message === "Internal Server Errorjwt expired"){
+                    setCurrentUser(null);
+                }
+            }
+            } catch (error) {
+              console.log(error);
+            }
+        }
+    
+        useEffect(()=>{
+            fetchAllExpenses()
+        },[])
+    
 
   const stats = [
     {
@@ -12,7 +42,7 @@ export default function AdminDashboard() {
     },
     {
       title: 'Expenses',
-      value: expenseData && expenseData.length,
+      value: AllExpenses && AllExpenses.length,
       growth: '-4%',
     },
     {
