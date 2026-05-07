@@ -18,7 +18,7 @@ export default function AddExpense() {
   const handleSubmit = async(e) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:4000/api/expense/add-expense",{
+    const res = await fetch("http://localhost:4000/api/expenses/add-expense",{
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -29,7 +29,7 @@ export default function AddExpense() {
 
     const result = await res.json();
     if (result.success) {
-      setData([...data, form]);
+      setData([...data, result]);
       setForm({
         title: "",
         amount: "",
