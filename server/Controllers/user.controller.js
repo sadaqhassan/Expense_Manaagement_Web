@@ -104,3 +104,15 @@ export const getUser = async (req, res) => {
         console.log("Error fetching user:", error);
     }
 }
+
+//logout
+
+export const logoutUser = async (req, res) => {
+    try {
+        res.clearCookie("accessToken");
+        return res.status(200).json({ success: true, message: "User logged out successfully" });
+    }catch (error) {
+        return res.status(500).json({ success: false, message: "Server error" + error.message });
+        console.log("Error logging out user:", error);
+    }
+}
