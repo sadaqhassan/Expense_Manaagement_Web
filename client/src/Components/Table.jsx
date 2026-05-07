@@ -2,16 +2,33 @@ import { Edit, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../Context/AppContext";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Table() {
   const navigate = useNavigate();
-  const { data } = useAppContext();
+  const {expenseData, setExpenseData} = useAppContext();
+
 
   const getStatusStyle = (status) => {
     return status === "Paid"
       ? "bg-green-100 text-green-600"
       : "bg-yellow-100 text-yellow-600";
   };
+
+  const deleteExpense = async(id)=>{
+    const res = await fetch(`http://localhost:4000/api/expenses/delete-expense/${id}`,{
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include"
+    });
+    const result = await res.json();
+    if(result.success){
+      return toast.success(result.message);
+      setExpenseData([...expenseData,result.expenseData]);
+    }
+  }
 
   return (
     <div className="p-4 md:p-6 md:w-[800px] min-h-screen">
@@ -44,18 +61,18 @@ export default function Table() {
             </thead>
 
             <tbody>
-              {data.length > 0 ? (
-                data.map((item) => (
+              {expenseData && expenseData.length > 0 ? (
+                expenseData.map((item) => (
                   <tr key={item.id} className="border-b hover:bg-gray-50">
                     <td className="p-4">{item.category}</td>
                     <td className="p-4 font-medium">{item.title}</td>
                     <td className="p-4 text-green-600 font-semibold">
                       ${item.amount}
                     </td>
-                    <td className="p-4 text-gray-500">{item.date}</td>
+                    <td className="p-4 text-gray-500">{new Date(item.date).toLocaleDateString()}</td>
                     <td className="p-4 flex justify-end gap-3">
                       <Edit className="text-blue-500 cursor-pointer" size={18} />
-                      <Trash2 className="text-red-500 cursor-pointer" size={18} />
+                      <Trash2 onClick={()=>deleteExpense(item._id)} className="text-red-500 cursor-pointer" size={18} />
                     </td>
                   </tr>
                 ))
@@ -72,8 +89,8 @@ export default function Table() {
 
         {/* Mobile */}
         <div className="md:hidden p-4 space-y-4">
-          {data.length > 0 ? (
-            data.map((item) => (
+          {expenseData && expenseData.length > 0 ? (
+            expenseData.map((item) => (
               <div key={item.id} className="bg-gray-50 rounded-xl p-4 shadow-sm">
                 <div className="flex justify-between items-center">
                   <h3 className="font-semibold">{item.title}</h3>
