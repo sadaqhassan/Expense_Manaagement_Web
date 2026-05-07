@@ -7,8 +7,8 @@ export default function AdminSidebar() {
       
       {/* Logo */}
       <div>
-        <div className="p-5 text-sm font-medium border-b border-gray-700">
-          Expense_Management
+        <div className="p-5 text-xl font-medium border-b border-gray-700">
+          EMS ADMIN
         </div>
 
         {/* Menu */}
