@@ -4,11 +4,13 @@ import toast from "react-hot-toast";
 import { useAppContext } from "../../Context/AppContext";
 
 const ManageUsers = () => {
-const {users,setUsers} =  useAppContext()
+const {users,setUsers,expenseData} =  useAppContext()
 
+console.log(expenseData.length.toLocaleString())
   const [search, setSearch] = useState("");
   const {currentUser, setCurrentUser,fetchUsers} = useAppContext();
 
+  
 
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(search.toLowerCase())
