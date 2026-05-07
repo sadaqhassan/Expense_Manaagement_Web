@@ -20,6 +20,11 @@ const expense = mongoose.Schema({
     date:{
         type: Date,
         required: true
+    },
+    assignedTo:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
 },{timeStamps: true});
 
