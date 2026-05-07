@@ -47,3 +47,16 @@ export const deleteExpense = async (req, res) => {
         console.log("Error deleting expense:", error);
     }
 }
+
+
+//get all expenses for admin
+
+export const getAllExpenses = async (req, res) => {
+    try {
+        const expenses = await Expenses.find().sort({ createdAt: -1 });
+        res.status(200).json({ success: true, AllExpenses: expenses });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Internal Server Error", error: error.message });
+        console.log("Error getting all expenses:", error);
+    }
+}
