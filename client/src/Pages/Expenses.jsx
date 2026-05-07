@@ -1,7 +1,11 @@
 import React from 'react'
 import Table from '../Components/Table'
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useAppContext } from '../Context/AppContext';
 
 const Expenses = () => {
+ 
   return (
     <div>
         <h1 className='text-xl text-gray-900 font-medium'>Expense Management </h1>
