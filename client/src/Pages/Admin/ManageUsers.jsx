@@ -7,32 +7,8 @@ const ManageUsers = () => {
 const {users,setUsers} =  useAppContext()
 
   const [search, setSearch] = useState("");
-  const {currentUser, setCurrentUser} = useAppContext();
+  const {currentUser, setCurrentUser,fetchUsers} = useAppContext();
 
-  const fetchUsers = async () => {
-    try {
-      const res = await fetch("http://localhost:4000/api/user/get-users", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        setUsers(data.users);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error("Server error");
-    }
-  };
-
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
 
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(search.toLowerCase())
