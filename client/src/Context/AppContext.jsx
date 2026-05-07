@@ -127,14 +127,15 @@ useEffect(()=>{
     ])
     },[expenseData])
 
-
+   
     const value = {
         dashboard,setDashboard,
         currentUser,setCurrentUser
         ,users, setUsers,
         userData,setUserData,
         expenseData, setExpenseData,
-        fetchUsers,fetchExpenses
+        fetchUsers,fetchExpenses,
+        
     }
 
     return <Appcontext.Provider value={value}>
