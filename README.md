@@ -98,10 +98,6 @@ Marka users ama expenses bataan performance-ka wuu fiicnaanayaa.
 
 2. Add Charts
 
-Isticmaal:
-
-Recharts
-Chart.js
 
 Dashboard-ka wuxuu noqonayaa professional.
 
