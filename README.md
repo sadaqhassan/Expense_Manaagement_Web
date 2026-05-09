@@ -131,7 +131,7 @@ Frontend
 Vercel
 Backend
 Render
-Railway
+
 Database
 MongoDB Atlas
 🔥 Future Improvements
