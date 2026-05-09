@@ -129,7 +129,6 @@ Socket.io isticmaali si admin uu user logout ugu sameeyo.
 8. Deploy Project 🚀
 Frontend
 Vercel
-Netlify
 Backend
 Render
 Railway
