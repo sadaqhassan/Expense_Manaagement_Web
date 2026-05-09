@@ -17,7 +17,8 @@ Express.js
 MongoDB
 JWT Authentication
 Tailwind CSS
-🚀 Features
+//////  🚀 Features   /////////
+
 👤 User Features
 Register/Login
 Add Expense
