@@ -69,17 +69,7 @@ JWT token generated
 Token stored in HTTP-only cookie
 Protected routes verify token
 Auto logout when token expires
-⚡ API Endpoints
-User Routes
-POST   /api/user/register
-POST   /api/user/login
-GET    /api/user/get-user
-DELETE /api/user/delete-user/:id
-GET    /api/user/get-users
-Expense Routes
-POST   /api/expense/add-expense
-GET    /api/expense/get-expenses
-DELETE /api/expense/delete-expense/:id
+
 📦 Installation
 Clone Repository
 git clone your-repo-link
